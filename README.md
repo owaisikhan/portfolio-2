@@ -1,7 +1,7 @@
 # Owais Khan — Portfolio (v2)
 
 A dark, motion-led portfolio built to be shown to prospective clients. It lists
-2026 work drawn from the repositories I own or collaborate on, with a full
+2026 work drawn from the repositories I own or build in, with a full
 case-study page per project.
 
 Sections: hero, stats, selected work, about, services, process, stack, FAQ and

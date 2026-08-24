@@ -1,6 +1,6 @@
 /**
- * Every project here is 2026 work, drawn from repositories I own or
- * collaborate on. Course-follow-along and practice repos are deliberately
+ * Every project here is 2026 work, drawn from the repositories we own or
+ * build in — most of it shipped as a two-person team. Course-follow-along and practice repos are deliberately
  * left out — this list is meant to show shipped products, not exercises.
  *
  * Repositories considered in the 2026 scan, and why each is in or out:
@@ -30,7 +30,7 @@ export const projects = [
     slug: "offline-petrol-pump-manager",
     name: "Offline Petrol Pump Manager",
     year: "2026",
-    role: "Collaborator",
+    role: "Two-person team",
     kind: "Desktop software",
     accent: "#f97316",
     featured: true,
@@ -58,7 +58,7 @@ export const projects = [
     slug: "offline-committee-manager",
     name: "Offline Committee Manager",
     year: "2026",
-    role: "Collaborator",
+    role: "Two-person team",
     kind: "Desktop software",
     accent: "#14b8a6",
     featured: true,
@@ -92,7 +92,7 @@ export const projects = [
     slug: "petrol-pump-management-software",
     name: "Petrol Pump Management Software",
     year: "2026",
-    role: "Collaborator",
+    role: "Two-person team",
     kind: "Web application",
     accent: "#eab308",
     featured: true,
@@ -119,7 +119,7 @@ export const projects = [
     slug: "saamj-store",
     name: "SAAMJ Store",
     year: "2026",
-    role: "Collaborator",
+    role: "Two-person team",
     kind: "E-commerce",
     accent: "#ec4899",
     featured: true,
@@ -147,7 +147,7 @@ export const projects = [
     slug: "roaster-coffee-shop",
     name: "Roaster Coffee Shop",
     year: "2026",
-    role: "Collaborator",
+    role: "Two-person team",
     kind: "Marketing & ordering",
     accent: "#b45309",
     featured: false,
@@ -180,7 +180,7 @@ export const projects = [
     slug: "ecommerce-reactive-chatbot",
     name: "E-commerce Reactive Chatbot",
     year: "2026",
-    role: "Collaborator",
+    role: "Two-person team",
     kind: "Applied AI",
     accent: "#8b5cf6",
     featured: true,
@@ -213,7 +213,7 @@ export const projects = [
     slug: "store-ai-agent",
     name: "Store AI Agent",
     year: "2026",
-    role: "Collaborator",
+    role: "Two-person team",
     kind: "Applied AI",
     accent: "#06b6d4",
     featured: false,
@@ -246,7 +246,7 @@ export const projects = [
     slug: "psx-rsi-dashboard",
     name: "PSX RSI Dashboard",
     year: "2026",
-    role: "Collaborator & maintainer",
+    role: "Two-person team · maintainer",
     kind: "Web + desktop",
     accent: "#22c55e",
     featured: true,

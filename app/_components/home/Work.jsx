@@ -20,8 +20,8 @@ export function Work() {
       <SectionHeading
         index="01"
         label="Selected work"
-        title="Seven products shipped in 2026."
-        lede="Client software and collaborations, drawn from the repositories I own or work in. Practice and course repositories are left out on purpose — everything below is something a business uses."
+        title="Nine products shipped in 2026."
+        lede="Client software and team projects, drawn from the repositories I own or build in. Practice and course repositories are left out on purpose — everything below is something a business uses."
       />
 
       <StaggerGroup className="mt-14 grid gap-5 md:grid-cols-2">

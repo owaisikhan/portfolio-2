@@ -143,11 +143,11 @@ export const siteConfig = {
   faq: [
     {
       q: "Why can't I see the code for some of these projects?",
-      a: "Three of them are private client repositories — a petrol-pump management system and an e-commerce platform I built with a collaborator. Linking them would send you to a 404. I'm happy to walk through the code, the schema and the trade-offs live on a call.",
+      a: "Three of them are private client repositories — a petrol-pump management system and an e-commerce platform built as a two-person team. Linking them would send you to a 404. I'm happy to walk through the code, the schema and the trade-offs live on a call.",
     },
     {
       q: "Do you work alone or with a team?",
-      a: "Both. Several of the projects here are collaborations where I work as a repository collaborator alongside another engineer, and others I've taken from empty repo to shipped product on my own. I'm comfortable owning a codebase or joining one.",
+      a: "Both. Most of the work here is built as a two-person team with another engineer — we take a project from empty repository to shipped product together, splitting the build rather than passing tickets back and forth. Others, this site among them, I've taken end to end on my own. I'm comfortable owning a codebase or joining one.",
     },
     {
       q: "Can you build something that runs without the internet?",
@@ -176,5 +176,5 @@ export const stats = [
   { value: "9", label: "Products shipped in 2026" },
   { value: "4", label: "Businesses served" },
   { value: "3", label: "Desktop apps packaged" },
-  { value: "8", label: "Repositories collaborated on" },
+  { value: "8", label: "Projects built as a team" },
 ];
