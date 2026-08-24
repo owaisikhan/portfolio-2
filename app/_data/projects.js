@@ -9,7 +9,7 @@
  *   in   Ammar-Sagheer/Offline-Committee-Manager-App
  *   in   Ammar-Sagheer/Petrol-Pump-Management-Software    (private)
  *   in   Ammar-Sagheer/saam-s-store, saam-s-store-client1 (private)
- *   in   Ammar-Sagheer/Coffee-Shop-Website
+ *   in   Ammar-Sagheer/Coffee-Shop-Website                (private)
  *   in   Ammar-Sagheer/ecommerce-reactive-chatbot
  *   in   Ammar-Sagheer/reactive-google-ai-agent
  *   in   Ammar-Sagheer/Stocks-RSI-Display
@@ -151,7 +151,7 @@ export const projects = [
     kind: "Marketing & ordering",
     accent: "#b45309",
     featured: false,
-    isPrivate: false,
+    isPrivate: true,
     tagline: "A specialty roastery site that prints what it paid the farmer.",
     summary:
       "Single-page site for a specialty coffee roastery and bar: the story, the espresso and filter menu, a pickup-order panel, and a sourcing table naming every farm the beans came from alongside the price paid for them.",
@@ -173,10 +173,6 @@ export const projects = [
       {
         label: "Live site",
         href: "https://coffee-shop-2-nu.vercel.app/",
-      },
-      {
-        label: "Repository",
-        href: "https://github.com/Ammar-Sagheer/Coffee-Shop-Website",
       },
     ],
   },
