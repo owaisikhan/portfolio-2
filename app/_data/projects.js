@@ -6,8 +6,10 @@
  * Repositories considered in the 2026 scan, and why each is in or out:
  *
  *   in   Ammar-Sagheer/Offline-Petrol-Pump-Manager        (private)
+ *   in   Ammar-Sagheer/Offline-Committee-Manager-App
  *   in   Ammar-Sagheer/Petrol-Pump-Management-Software    (private)
  *   in   Ammar-Sagheer/saam-s-store, saam-s-store-client1 (private)
+ *   in   Ammar-Sagheer/Coffee-Shop-Website                 (private)
  *   in   Ammar-Sagheer/ecommerce-reactive-chatbot
  *   in   Ammar-Sagheer/reactive-google-ai-agent
  *   in   Ammar-Sagheer/Stocks-RSI-Display
@@ -51,6 +53,40 @@ export const projects = [
     ],
     stack: ["Next.js", "Electron", "PostgreSQL", "electron-builder", "Recharts"],
     links: [],
+  },
+  {
+    slug: "offline-committee-manager",
+    name: "Offline Committee Manager",
+    year: "2026",
+    role: "Collaborator",
+    kind: "Desktop software",
+    accent: "#14b8a6",
+    featured: true,
+    isPrivate: false,
+    tagline: "A rotating savings committee's books, on one laptop, with the rules living in the database.",
+    summary:
+      "Offline Windows desktop app for running a monthly committee — ten members paying in, one taking the pot each month and repaying it over the following fifteen. It installs like a normal program, keeps its books in its own bundled Postgres, and never touches the internet.",
+    problem:
+      "The committee's danger is invisible from the bank balance. With a ten-month rotation repaid over fifteen, full-size payouts go out while the repayment stream behind them is still building — on the real figures, an account holding Rs 520,000 is emptied by month 20 and bottoms out below zero by month 24. Half a million rupees looks like plenty right up to the month it is not.",
+    approach:
+      "The month-by-month cash flow is simulated rather than estimated: a binary search over that simulation finds the largest payout that never breaches the cushion, and a separate function sizes the three ways out — hand over less, repay faster, or raise everyone's contribution. Because the squeeze is a ramp rather than a ceiling, the app distinguishes \"cannot afford this\" from \"cannot afford this yet\".",
+    outcome:
+      "The manager runs the whole committee offline and prints the month's sheets for the other nine. Every rule that matters is a trigger or constraint in Postgres, so the ledger is append-only for everybody — a mistake is corrected by writing the opposite entry, and both stay visible and cancel out in every total.",
+    highlights: [
+      "Payout ceiling found by binary search over a real cash-flow simulation",
+      "Append-only ledger — no update, no delete, for any role",
+      "Overdrafts refused outright; policy breaches only with a recorded reason",
+      "Members' stakes and the bank balance are one sum read two ways, so they cannot drift",
+      "Bundled Postgres inside the install, bound to loopback and nowhere else",
+      "Encrypted-folder backup that warns the books and their passwords must travel together",
+    ],
+    stack: ["Next.js 16", "React 19", "Electron", "PostgreSQL", "Recharts", "Tailwind CSS v4"],
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/Ammar-Sagheer/Offline-Committee-Manager-App",
+      },
+    ],
   },
   {
     slug: "petrol-pump-management-software",
@@ -106,6 +142,39 @@ export const projects = [
     ],
     stack: ["Next.js", "Supabase", "PostgreSQL", "Tailwind CSS v4", "Stripe-ready"],
     links: [],
+  },
+  {
+    slug: "roaster-coffee-shop",
+    name: "Roaster Coffee Shop",
+    year: "2026",
+    role: "Collaborator",
+    kind: "Marketing & ordering",
+    accent: "#b45309",
+    featured: false,
+    isPrivate: true,
+    tagline: "A specialty roastery site that prints what it paid the farmer.",
+    summary:
+      "Single-page site for a specialty coffee roastery and bar: the story, the espresso and filter menu, a pickup-order panel, and a sourcing table naming every farm the beans came from alongside the price paid for them.",
+    problem:
+      "A coffee shop with nine named farm partners and a two-week freshness window has a story that a generic menu page throws away — and the customer standing on the pavement mostly wants one thing, which is to order a flat white for pickup without downloading anything.",
+    approach:
+      "One scrolling page with anchored sections rather than a multi-page site, so nothing costs a navigation. The order panel sits inline — pick a drink, size, quantity and the name for the cup, with the total recalculating as you go — and a search field filters the espresso bar, filter coffee and retail bags in place.",
+    outcome:
+      "The whole page is statically prerendered and ships on Vercel, so there is no server to keep warm. Sourcing is treated as content rather than a claim: a table lists each farm, its origin, varietal and the per-pound price paid, which is the same figure printed on the bag.",
+    highlights: [
+      "Inline pickup ordering — drink, size, quantity, name for the cup, live total",
+      "Type-ahead search across the espresso bar, filter coffee and retail bags",
+      "Farm-by-farm sourcing table showing origin, varietal and price paid",
+      "Anchored single-page layout, statically prerendered end to end",
+      "Testimonial carousel and newsletter capture without a backend to run",
+    ],
+    stack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+    links: [
+      {
+        label: "Live site",
+        href: "https://coffee-shop-2-nu.vercel.app/",
+      },
+    ],
   },
   {
     slug: "ecommerce-reactive-chatbot",

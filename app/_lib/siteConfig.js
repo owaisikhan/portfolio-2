@@ -173,8 +173,8 @@ export const siteConfig = {
  * the string and keeps whatever prefix/suffix is around it.
  */
 export const stats = [
-  { value: "7", label: "Products shipped in 2026" },
-  { value: "3", label: "Businesses served" },
-  { value: "2", label: "Desktop apps packaged" },
-  { value: "6", label: "Repositories collaborated on" },
+  { value: "9", label: "Products shipped in 2026" },
+  { value: "4", label: "Businesses served" },
+  { value: "3", label: "Desktop apps packaged" },
+  { value: "8", label: "Repositories collaborated on" },
 ];
