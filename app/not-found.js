@@ -8,10 +8,10 @@ export const metadata = { title: "Page not found" };
 export default function NotFound() {
   return (
     <section className="shell flex min-h-[70vh] flex-col items-center justify-center gap-6 py-32 text-center">
-      <p className="font-mono text-xs tracking-[0.18em] text-accent-lime uppercase">
+      <p className="font-mono text-xs tracking-[0.18em] text-tungsten uppercase">
         404
       </p>
-      <h1 className="text-headline max-w-2xl font-semibold fade-text">
+      <h1 className="display text-headline max-w-2xl">
         That page doesn&apos;t exist.
       </h1>
       <p className="max-w-md text-muted-foreground">

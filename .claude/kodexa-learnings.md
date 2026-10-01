@@ -19,6 +19,9 @@ for the rules.
 | L-001 | 2026-10-01 | rule | Redesign starts with concepts, design language and a skeleton, agreed before any visual design or code | all | logged |
 | L-002 | 2026-10-01 | gap | Portfolio projects carry a cover image on the home page and a walkthrough video on the case study | type: marketing-site | logged |
 | L-003 | 2026-10-01 | choice | Meridian Digital Consulting comes off the portfolio | project | project |
+| L-004 | 2026-10-01 | choice | Owner picked the dark film-led "Cutting Room" over the recommended light ledger concept | type: marketing-site | logged |
+| L-005 | 2026-10-01 | rule | Once a direction is picked on the skeleton, build it; no separate visual-design round | all | logged |
+| L-006 | 2026-10-01 | rule | For screenshots and walkthroughs of apps behind login, ask the owner for demo logins or .env.local up front | all | logged |
 
 ## Entries
 
@@ -45,3 +48,27 @@ for the rules.
 - **Scope:** project
 - **Target in skill:** none (project content)
 - **Status:** project
+
+### L-004 · 2026-10-01 · strong · choice
+- **Said / saw:** "go with this design and build" (artifact comment on "B · Cutting Room"; A "Day Book" was marked Recommended)
+- **Context:** portfolio v3 concepts: A light ledger, B dark film-led edit suite, C reskin of v2
+- **Lesson:** For this owner's own portfolio, a media-first dark direction beat the light editorial one even when the work is mostly business software. When the brief includes a hero video and per-project walkthroughs, offer a media-first concept and do not assume light wins because the clients are small businesses.
+- **Scope:** type: marketing-site (portfolios)
+- **Target in skill:** references/types/marketing-site.md, section 3 "Design direction"
+- **Status:** logged
+
+### L-005 · 2026-10-01 · strong · rule
+- **Said / saw:** "go with this design and build", in reply to a skeleton that listed "stage 2: home page visual design" before the build
+- **Context:** portfolio v3 planning sheet
+- **Lesson:** The concept and skeleton round is the approval gate. Once the owner picks a direction on it, build the page directly in that direction rather than producing a separate static design round; iterate on the built page with screenshots.
+- **Scope:** all projects
+- **Target in skill:** references/types/marketing-site.md, section 8 "Redesigns and variants" (refines L-001)
+- **Status:** logged
+
+### L-006 · 2026-10-01 · medium · rule
+- **Said / saw:** "ask me if any project database is paused or you need .env.local to access the site, i will send it,, even the login details for this screen capture purpose"
+- **Context:** capturing covers and walkthroughs for 16 projects, most behind Supabase sign-in
+- **Lesson:** Before capturing screenshots or walkthroughs of apps behind a login, check database status (Supabase list_projects) and ask the owner in one message for the exact demo logins or env files needed, per project. Prefer a demo account with sample data; never commit credentials.
+- **Scope:** all projects
+- **Target in skill:** SKILL.md section 3 "Working style"
+- **Status:** logged

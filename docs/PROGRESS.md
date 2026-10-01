@@ -1,23 +1,75 @@
 # Progress & decisions
 
 Why things are built the way they are. Read this before "simplifying" the
-motion code — several things that look redundant are load-bearing.
+motion code, several things that look redundant are load-bearing.
+
+## v3: the "Cutting Room" redesign (2026-10-01)
+
+How it was decided: the owner asked for concepts, a design language and a
+greyscale skeleton before any design or code. Three directions were shown
+(A "Day Book", light and ledger-like, recommended; B "Cutting Room", dark and
+film-led; C "Re-tune", today's layout reskinned). The owner picked **B** and
+asked to build it straight away, skipping a separate visual-design round. The
+skeleton (nine blocks, Meridian removed at the owner's request) was kept as
+the structure.
+
+What changed and why:
+
+- **Palette.** Acid lime on near-black was the look most AI-built developer
+  portfolios land on. v3 is true neutral black, bone white and one tungsten
+  amber that only marks timecodes, scene numbers and the REC light. The
+  gradient headline text (`fade-text`), the hero grid backdrop and the accent
+  "bloom" glows are gone for the same reason.
+- **Type.** Anton in capitals for display, self-hosted so the build never
+  reaches a font CDN; Geist stays for text and labels.
+- **Hero.** The terminal card became `HeroMonitor`, a camera-style frame with a
+  running timecode. It plays `siteConfig.heroVideo` once the owner supplies the
+  film; until then it cuts between the featured projects' covers or slates.
+- **Work.** Sixteen projects do not fit as cards, so the six featured ones get
+  spreads and every project gets a numbered index row with a category filter.
+  The filter is a small external store (`_lib/indexFilter.js`) so the Services
+  rows can preselect it.
+- **Slates.** Projects without a screenshot show a clapperboard whose fields
+  are real data, so a missing cover still reads as deliberate.
+- **Removed:** the custom cursor ring and the tilt spotlight cards (both read as
+  template and cost frames on phones), the tech marquees, and separate
+  Process and Stack sections (merged into About).
+- **Lenis** smooth scroll added, driven from GSAP's ticker.
+- **Copy** rewritten without em or en dashes or filler words, leading with what
+  a business gets.
+- **Proof strip** numbers are computed from `projects.js`.
+
+Covers captured so far (Playwright, 1600x1000): Kinari Tea House, Kodexa House
+and AI Try-on Store from local builds, Roaster from its live site. The rest
+show slates until the owner provides demo logins or `.env.local` files for the
+apps behind sign-in. The Sohana POS demo URL failed through this sandbox's
+proxy; it may work from a normal network. In Supabase on 2026-10-01 the two
+SAAMJ projects were paused (INACTIVE); Pharmacy-POS and Mubeen Petroleum were
+active.
+
+Verified: build and lint clean, 20 routes prerendered; at 1440x900, 1440x768
+and 390x844, with and without reduced motion: the hero CTA is above the fold,
+no element is left below opacity 0.05 after a scroll-through, no sideways
+scroll, no console output.
+
+Next: the case-study page (walkthrough player with chapters, screenshot
+gallery), the hero film once the reference arrives, the remaining covers.
 
 ## Where the project list came from
 
 The site exists to show 2026 work, so the list was built by scanning every
 repository the account owns or collaborates on and filtering to 2026 activity.
-The full in/out ledger — including why the course-follow-along repositories
+The full in/out ledger, including why the course-follow-along repositories
 (`the-wild-oasis`, `Hotel-Website`, `Hotel-Management-App`, `Pizza_Made_BY_US`,
 `react-pizza`) and the scratch repositories (`practice-react`, `test`) are
-excluded — is in the header comment of `app/_data/projects.js`. Keep that
+excluded, is in the header comment of `app/_data/projects.js`. Keep that
 comment current when the list changes; it is the only record of the decision.
 
 Three entries are private client repositories. They carry `links: []` and
 `isPrivate: true` on purpose: a client clicking through to a GitHub 404 looks
 worse than no link at all, so the case study offers a walkthrough call instead.
 
-## Design direction
+## Design direction (v2, superseded by v3 above)
 
 Modelled on the dark developer-showcase template genre the site was briefed
 against: near-black ground, one signature accent, hairline borders, oversized
@@ -25,15 +77,15 @@ display type, a floating pill nav, a tech marquee, numbered service cards, a
 timeline, an FAQ accordion, and the name set as large as the viewport allows
 across the footer.
 
-The reference site itself could not be loaded — this environment's egress proxy
-blocks `webflow.io` — so the layout was built from the conventions of that
+The reference site itself could not be loaded, this environment's egress proxy
+blocks `webflow.io`, so the layout was built from the conventions of that
 genre rather than copied section for section. If the visual direction needs to
 track the reference more literally, that is the thing to re-check first.
 
 Two deliberate departures:
 
 - **No portrait.** The brief said not to use a photo at this stage, so the slot
-  a template fills with a headshot holds `TerminalCard` — a terminal transcript
+  a template fills with a headshot holds `TerminalCard`, a terminal transcript
   that types itself out. It carries the same information a bio photo block
   would (who, stack, shipped work, availability) and suits a developer
   portfolio better than a placeholder avatar.
@@ -57,7 +109,10 @@ interchangeably:
 `app/_lib/gsap.js` is the single plugin registration point. Import `gsap` from
 there, never from the package, so ScrollTrigger is guaranteed registered.
 
-## Bugs found while building, and what they cost
+## Bugs found while building v2, and what they cost
+
+Some of the components below (`TerminalCard`, `TiltCard`, `fade-text`) were
+removed in v3; the lessons still apply.
 
 These are the non-obvious ones. Each was found by rendering the page, not by
 reading the code.
@@ -88,7 +143,7 @@ Fix: the custom utility was renamed out of the `text-*` namespace to
 
 `MagneticButton` originally wrapped the Button's *children* in a `motion.span`
 for a label parallax effect. With `asChild`, Radix's Slot clones its single
-child — which was that span — so the rendered pill was a span and the real
+child, which was that span, so the rendered pill was a span and the real
 `<a href>` ended up nested inside it. Only the text was clickable, and the
 Button's `whitespace-nowrap` never reached the label, so "See the work" wrapped
 onto two lines.
@@ -101,7 +156,7 @@ worth a broken hit area.
 
 `TerminalCard` held a `ref` that was never placed on an element, because
 `TiltCard` is a motion component and does not forward refs. The effect hit
-`if (!el) return` and the card rendered permanently empty — no error, no
+`if (!el) return` and the card rendered permanently empty, no error, no
 warning. The scope now lives on an inner element that is an ancestor of every
 animated line.
 
@@ -126,7 +181,7 @@ before trusting a visual check.
   and the animated lines are `aria-hidden`.
 - `Marquee` renders its item list twice for a seamless loop; the second copy is
   `aria-hidden`.
-- The footer's oversized name is decorative and `aria-hidden` — the accessible
+- The footer's oversized name is decorative and `aria-hidden`, the accessible
   name of the site is already in the header and in `<title>`.
 - `Cursor` renders nothing at all on coarse pointers or under reduced motion,
   via `useSyncExternalStore` so the server snapshot matches first client paint.
@@ -144,7 +199,7 @@ overflow, and the hero CTA is a single-line anchor with a full-size hit area.
 ## Not done yet
 
 - No Open Graph image. `opengraph-image.js` would need a design pass.
-- `metadataBase` is a placeholder (`https://owaiskhan.dev`) — set it to the
+- `metadataBase` is a placeholder (`https://owaiskhan.dev`), set it to the
   real domain before launch or social cards will resolve against the wrong
   host.
 - No sitemap or `robots.txt`.

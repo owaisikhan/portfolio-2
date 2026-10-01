@@ -1,59 +1,42 @@
-import { Check } from "lucide-react";
-
+import { ServiceProjectsLink } from "@/app/_components/home/ServiceProjectsLink";
 import { StaggerGroup } from "@/app/_components/motion/StaggerGroup";
-import { TiltCard } from "@/app/_components/motion/TiltCard";
 import { SectionHeading } from "@/app/_components/shared/SectionHeading";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/app/_components/ui/card";
+import { projects } from "@/app/_data/projects";
 import { siteConfig } from "@/app/_lib/siteConfig";
 
+/** Four rows, each linked to the projects that prove it. */
 export function Services() {
   return (
-    <section id="services" className="shell scroll-mt-28 py-20 md:py-28">
+    <section id="services" className="shell scroll-mt-24 py-16 md:py-24">
       <SectionHeading
-        index="03"
+        scene="02"
         label="Services"
-        title="What I can build for you."
-        lede="Four things I do repeatedly and well, rather than a list of everything I have ever touched."
+        title="What I build for businesses."
+        lede="Four things I do again and again, rather than a list of everything I have ever touched."
       />
 
-      <StaggerGroup className="mt-14 grid gap-5 md:grid-cols-2">
-        {siteConfig.services.map((service, index) => (
-          <TiltCard key={service.title} max={4}>
-            <Card className="h-full gap-5 transition-colors duration-300 hover:border-white/20">
-              <CardHeader className="gap-4">
-                <span className="font-mono text-xs text-accent-lime">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <CardTitle className="text-xl md:text-2xl">
-                  {service.title}
-                </CardTitle>
-                <CardDescription className="text-base">
-                  {service.body}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent>
-                <ul className="flex flex-wrap gap-x-5 gap-y-2">
+      <StaggerGroup as="ol" className="mt-10 border-t border-border md:mt-14">
+        {siteConfig.services.map((service, index) => {
+          const count = projects.filter((project) => project.category === service.category).length;
+          return (
+            <li
+              key={service.title}
+              className="grid gap-4 border-b border-border py-8 md:grid-cols-[3rem_minmax(0,1fr)_minmax(0,1.3fr)_auto] md:gap-8 md:py-10"
+            >
+              <span className="timecode text-tungsten">{String(index + 1).padStart(2, "0")}</span>
+              <h3 className="text-xl font-semibold tracking-tight md:text-2xl">{service.title}</h3>
+              <div className="flex flex-col gap-4">
+                <p className="leading-relaxed text-muted-foreground">{service.body}</p>
+                <ul className="timecode flex flex-wrap gap-x-5 gap-y-2 text-muted-foreground">
                   {service.points.map((point) => (
-                    <li
-                      key={point}
-                      className="inline-flex items-center gap-2 text-sm text-muted-foreground"
-                    >
-                      <Check className="size-3.5 text-accent-lime" />
-                      {point}
-                    </li>
+                    <li key={point}>{point}</li>
                   ))}
                 </ul>
-              </CardContent>
-            </Card>
-          </TiltCard>
-        ))}
+              </div>
+              <ServiceProjectsLink category={service.category} count={count} />
+            </li>
+          );
+        })}
       </StaggerGroup>
     </section>
   );

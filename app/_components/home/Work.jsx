@@ -1,109 +1,104 @@
 import Link from "next/link";
-import { ArrowUpRight, Lock } from "lucide-react";
+import { ArrowUpRight, Lock, Play } from "lucide-react";
 
-import { StaggerGroup } from "@/app/_components/motion/StaggerGroup";
-import { TiltCard } from "@/app/_components/motion/TiltCard";
+import { WorkIndex } from "@/app/_components/home/WorkIndex";
+import { Reveal } from "@/app/_components/motion/Reveal";
+import { ProjectCover } from "@/app/_components/shared/ProjectCover";
 import { SectionHeading } from "@/app/_components/shared/SectionHeading";
 import { Badge } from "@/app/_components/ui/badge";
-import { projects } from "@/app/_data/projects";
+import { featuredProjects, projects } from "@/app/_data/projects";
+import { cn } from "@/app/_lib/utils";
 
 /**
- * Selected work.
+ * Selected work, then the full index.
  *
- * The list is generated from `_data/projects.js` — adding a project is one
- * object in that file, which also generates its case-study route. Never
+ * Generated from `_data/projects.js`: `featured: true` puts a project in the
+ * spreads, and every project gets an index row and a case-study route. Never
  * hard-code a project here.
  */
 export function Work() {
   return (
-    <section id="work" className="shell scroll-mt-28 py-20 md:py-28">
+    <section id="work" className="shell scroll-mt-24 py-16 md:py-24">
       <SectionHeading
-        index="01"
+        scene="01"
         label="Selected work"
-        title="Nine products shipped in 2026."
-        lede="Client software and team projects, drawn from the repositories I own or build in. Practice and course repositories are left out on purpose — everything below is something a business uses."
+        title={`${projects.length} products shipped in 2026.`}
+        lede="Client software and team projects from the repositories I own or build in. Practice, course and clone repositories are left out: everything here is something a business uses."
       />
 
-      <StaggerGroup className="mt-14 grid gap-5 md:grid-cols-2">
-        {projects.map((project, index) => (
-          <ProjectCard
-            key={project.slug}
-            project={project}
-            index={index}
-            // The first two run full width, so the reel opens on the two
-            // pieces of work that carry the most weight.
-            wide={index < 2}
-          />
+      <div className="mt-12 flex flex-col md:mt-16">
+        {featuredProjects.map((project, index) => (
+          <Spread key={project.slug} project={project} take={index + 1} flip={index % 2 === 1} />
         ))}
-      </StaggerGroup>
+      </div>
+
+      <div className="mt-16 md:mt-24">
+        <WorkIndex />
+      </div>
     </section>
   );
 }
 
-function ProjectCard({ project, index, wide }) {
+function Spread({ project, take, flip }) {
   return (
-    <TiltCard
-      accent={project.accent}
-      max={4}
-      className={wide ? "md:col-span-2" : undefined}
+    <Reveal
+      as="article"
+      className="grid items-center gap-6 border-t border-border py-10 first:border-t-0 first:pt-0 md:gap-10 md:py-14 lg:grid-cols-12"
     >
       <Link
         href={`/work/${project.slug}`}
-        className="panel group flex h-full flex-col gap-6 overflow-hidden p-6 transition-colors duration-300 hover:border-white/25 md:p-8"
+        aria-label={`${project.name} case study`}
+        className={cn(
+          "group block overflow-hidden rounded-lg border border-border lg:col-span-7",
+          flip && "lg:order-2",
+        )}
       >
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="font-mono text-xs text-muted-foreground">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <Badge variant="mono">{project.kind}</Badge>
-            {project.isPrivate ? (
-              <Badge variant="mono">
-                <Lock className="size-3" />
-                Client / private
-              </Badge>
-            ) : null}
-          </div>
-
-          <span
-            aria-hidden="true"
-            className="grid size-9 shrink-0 place-items-center rounded-full border border-border transition-all duration-300 group-hover:border-transparent group-hover:bg-accent-lime group-hover:text-primary-foreground"
-          >
-            <ArrowUpRight className="size-4" />
-          </span>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            {project.name}
-          </h3>
-          <p
-            className="text-base leading-relaxed text-muted-foreground"
-            style={{ maxWidth: wide ? "46rem" : undefined }}
-          >
-            {project.tagline}
-          </p>
-        </div>
-
-        {/* A thin rule in the project's own accent — the only place the
-            per-project colour appears at full strength. */}
-        <span
-          aria-hidden="true"
-          className="h-px w-full origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
-          style={{
-            background: `linear-gradient(90deg, ${project.accent}, transparent)`,
-          }}
-        />
-
-        <div className="mt-auto flex flex-wrap items-center gap-2">
-          {project.stack.slice(0, 4).map((tech) => (
-            <Badge key={tech}>{tech}</Badge>
-          ))}
-          <span className="ml-auto font-mono text-xs text-muted-foreground">
-            {project.role} · {project.year}
-          </span>
+        <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transform-none">
+          <ProjectCover project={project} />
         </div>
       </Link>
-    </TiltCard>
+
+      <div className={cn("flex min-w-0 flex-col items-start gap-4 lg:col-span-5", flip && "lg:order-1")}>
+        <p className="timecode flex flex-wrap items-center gap-x-3 gap-y-1 text-muted-foreground">
+          <span className="text-tungsten">Take {String(take).padStart(2, "0")}</span>
+          <span>{project.platform}</span>
+          <span>{project.year}</span>
+          {project.isPrivate ? (
+            <span className="inline-flex items-center gap-1.5">
+              <Lock className="size-3" />
+              Client, private
+            </span>
+          ) : null}
+        </p>
+
+        <h3 className="display text-title">{project.name}</h3>
+
+        <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">{project.tagline}</p>
+
+        <ul className="flex flex-wrap gap-2">
+          {project.stack.slice(0, 3).map((tech) => (
+            <li key={tech}>
+              <Badge>{tech}</Badge>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Link
+            href={`/work/${project.slug}`}
+            className="group inline-flex items-center gap-2 border-b border-bone/40 pb-1 text-sm font-medium transition-colors hover:border-tungsten hover:text-tungsten"
+          >
+            Read the case study
+            <ArrowUpRight className="size-4" />
+          </Link>
+          {project.walkthrough ? (
+            <span className="timecode inline-flex items-center gap-2 text-muted-foreground">
+              <Play className="size-3 fill-current text-tungsten" />
+              Walkthrough {project.walkthrough.duration}
+            </span>
+          ) : null}
+        </div>
+      </div>
+    </Reveal>
   );
 }

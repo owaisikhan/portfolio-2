@@ -1,64 +1,58 @@
 import { ArrowUpRight, Github, Mail } from "lucide-react";
 
-import { KineticHeading } from "@/app/_components/motion/KineticHeading";
-import { MagneticButton } from "@/app/_components/motion/MagneticButton";
 import { Reveal } from "@/app/_components/motion/Reveal";
+import { WhatsAppIcon } from "@/app/_components/shared/WhatsAppIcon";
 import { Button } from "@/app/_components/ui/button";
-import { siteConfig } from "@/app/_lib/siteConfig";
+import { siteConfig, whatsappHref } from "@/app/_lib/siteConfig";
 
+/** The one inverted block on the page: bone ground, ink type. */
 export function Contact() {
+  const whatsapp = whatsappHref();
+
   return (
-    <section
-      id="contact"
-      className="relative isolate scroll-mt-28 overflow-hidden py-24 md:py-32"
-    >
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bloom rotate-180"
-      />
+    <section id="contact" className="shell scroll-mt-24 py-16 md:py-24">
+      <Reveal className="flex flex-col gap-8 rounded-xl bg-bone px-6 py-12 text-ink md:px-14 md:py-20">
+        <p className="timecode flex items-center gap-3 text-ink/70">
+          <span className="text-ink">SC 05</span>
+          <span aria-hidden="true" className="h-px w-8 bg-ink/25" />
+          <span>Contact</span>
+        </p>
 
-      <div className="shell flex flex-col items-center gap-8 text-center">
-        <Reveal className="inline-flex items-center gap-2.5 rounded-full border border-border bg-white/[0.03] px-4 py-1.5">
-          <span className="size-1.5 rounded-full bg-accent-lime" />
-          <span className="font-mono text-xs tracking-wide text-muted-foreground">
-            {siteConfig.availability}
-          </span>
-        </Reveal>
+        <h2 className="display text-headline max-w-5xl">Have a business that needs its own software?</h2>
 
-        <KineticHeading
-          as="h2"
-          lines={["Have something", "worth building?"]}
-          className="text-display font-semibold"
-          lineClassName="fade-text"
-          delay={0}
-        />
+        <p className="max-w-2xl text-base leading-relaxed text-ink/75 md:text-lg">
+          Tell me what the business has to get right and I will tell you straight whether I am the
+          right person to build it. No pitch deck, no discovery retainer: a call about the problem.
+        </p>
 
-        <Reveal
-          as="p"
-          className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg"
-        >
-          Tell me what the business needs to get right and I&apos;ll tell you
-          straight whether I&apos;m the right person to build it. No pitch deck,
-          no discovery retainer — just a call about the problem.
-        </Reveal>
-
-        <Reveal className="flex flex-wrap items-center justify-center gap-3">
-          <MagneticButton asChild size="lg">
+        <div className="flex flex-wrap items-center gap-3">
+          <Button asChild size="lg" className="bg-ink text-bone hover:bg-ink/85">
             <a href={`mailto:${siteConfig.email}`}>
               <Mail className="size-4" />
-              {siteConfig.email}
+              Email me
             </a>
-          </MagneticButton>
+          </Button>
 
-          <Button asChild variant="outline" size="lg">
+          {whatsapp ? (
+            <Button asChild size="lg" variant="outline" className="border-ink/25 bg-transparent text-ink hover:bg-ink/5 hover:border-ink/50">
+              <a href={whatsapp} target="_blank" rel="noreferrer">
+                <WhatsAppIcon className="size-4" />
+                WhatsApp
+              </a>
+            </Button>
+          ) : null}
+
+          <Button asChild size="lg" variant="ghost" className="text-ink/75 hover:bg-ink/5 hover:text-ink">
             <a href={siteConfig.github} target="_blank" rel="noreferrer">
               <Github />
               See the code
               <ArrowUpRight />
             </a>
           </Button>
-        </Reveal>
-      </div>
+        </div>
+
+        <p className="timecode text-ink/70 normal-case select-all">{siteConfig.email}</p>
+      </Reveal>
     </section>
   );
 }

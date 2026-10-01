@@ -15,7 +15,7 @@ import { cn } from "@/app/_lib/utils";
  * with `asChild`, Radix's Slot clones *that wrapper* and the real `<a>` ends
  * up nested inside the pill, so only the text is clickable and the button's
  * `whitespace-nowrap` never reaches the label. Keeping the transform outside
- * leaves `asChild` free to do its job — the anchor is the button.
+ * leaves `asChild` free to do its job: the anchor is the button.
  *
  * Pointer-only: skipped on coarse pointers and under reduced motion, and it
  * never moves far enough for the element to slide out from under the cursor.

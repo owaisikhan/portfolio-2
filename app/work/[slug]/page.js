@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check, Lock } from "lucide-react";
 
 import { Reveal } from "@/app/_components/motion/Reveal";
+import { ProjectCover } from "@/app/_components/shared/ProjectCover";
 import { StaggerGroup } from "@/app/_components/motion/StaggerGroup";
 import { Badge } from "@/app/_components/ui/badge";
 import { Button } from "@/app/_components/ui/button";
@@ -10,7 +11,7 @@ import { Separator } from "@/app/_components/ui/separator";
 import { getProject, projects } from "@/app/_data/projects";
 import { siteConfig } from "@/app/_lib/siteConfig";
 
-/** Every case study is prerendered — the site has no runtime data source. */
+/** Every case study is prerendered; the site has no runtime data source. */
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
@@ -48,14 +49,6 @@ export default async function ProjectPage({ params }) {
     <article className="pt-32 pb-8 md:pt-40">
       {/* Header ------------------------------------------------------------ */}
       <header className="relative isolate overflow-hidden pb-16 md:pb-20">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10"
-          style={{
-            background: `radial-gradient(50% 60% at 50% 0%, color-mix(in oklab, ${project.accent} 18%, transparent), transparent 70%)`,
-          }}
-        />
-
         <div className="shell flex flex-col gap-8">
           <Reveal>
             <Link
@@ -74,14 +67,14 @@ export default async function ProjectPage({ params }) {
             {project.isPrivate ? (
               <Badge variant="mono">
                 <Lock className="size-3" />
-                Client / private
+                Client, private
               </Badge>
             ) : null}
           </Reveal>
 
           <Reveal
             as="h1"
-            className="text-headline max-w-4xl font-semibold fade-text"
+            className="display text-headline max-w-5xl"
           >
             {project.name}
           </Reveal>
@@ -104,7 +97,7 @@ export default async function ProjectPage({ params }) {
                 </Button>
               ))
             ) : (
-              /* Private client work carries no repo link on purpose — see the
+              /* Private client work carries no repo link on purpose: see the
                  note at the top of app/_data/projects.js. */
               <p className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Lock className="size-4 shrink-0" />
@@ -116,6 +109,12 @@ export default async function ProjectPage({ params }) {
         </div>
       </header>
 
+      <div className="shell pb-16 md:pb-20">
+        <Reveal className="overflow-hidden rounded-lg border border-border">
+          <ProjectCover project={project} sizes="(min-width: 1376px) 1296px, 100vw" priority />
+        </Reveal>
+      </div>
+
       <Separator />
 
       {/* Body -------------------------------------------------------------- */}
@@ -123,7 +122,7 @@ export default async function ProjectPage({ params }) {
         <div className="flex flex-col gap-12">
           {body.map((block) => (
             <Reveal key={block.label} className="flex flex-col gap-4">
-              <h2 className="font-mono text-xs tracking-[0.18em] text-accent-lime uppercase">
+              <h2 className="font-mono text-xs tracking-[0.18em] text-tungsten uppercase">
                 {block.label}
               </h2>
               <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
@@ -133,7 +132,7 @@ export default async function ProjectPage({ params }) {
           ))}
 
           <Reveal className="flex flex-col gap-5">
-            <h2 className="font-mono text-xs tracking-[0.18em] text-accent-lime uppercase">
+            <h2 className="font-mono text-xs tracking-[0.18em] text-tungsten uppercase">
               Highlights
             </h2>
             <ul className="flex flex-col gap-3">
@@ -155,6 +154,21 @@ export default async function ProjectPage({ params }) {
               ))}
             </ul>
           </Reveal>
+
+          {project.improvements?.length ? (
+            <Reveal className="flex flex-col gap-5 rounded-lg border border-dashed border-border p-6">
+              <h2 className="font-mono text-xs tracking-[0.18em] text-tungsten uppercase">
+                What I would improve next
+              </h2>
+              <ul className="flex flex-col gap-3">
+                {project.improvements.map((item) => (
+                  <li key={item} className="leading-relaxed text-muted-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ) : null}
         </div>
 
         {/* Sidebar ---------------------------------------------------------- */}
@@ -193,6 +207,10 @@ export default async function ProjectPage({ params }) {
                 <dd>{project.kind}</dd>
               </div>
               <div className="flex items-center justify-between gap-4">
+                <dt className="text-muted-foreground">Platform</dt>
+                <dd>{project.platform}</dd>
+              </div>
+              <div className="flex items-center justify-between gap-4">
                 <dt className="text-muted-foreground">Year</dt>
                 <dd>{project.year}</dd>
               </div>
@@ -220,12 +238,12 @@ export default async function ProjectPage({ params }) {
             Next project
           </span>
           <span className="flex flex-wrap items-center justify-between gap-4">
-            <span className="text-headline font-semibold tracking-tight">
+            <span className="display text-headline">
               {next.name}
             </span>
             <span
               aria-hidden="true"
-              className="grid size-12 shrink-0 place-items-center rounded-full border border-border transition-all duration-300 group-hover:border-transparent group-hover:bg-accent-lime group-hover:text-primary-foreground"
+              className="grid size-12 shrink-0 place-items-center rounded-md border border-border transition-all duration-300 group-hover:border-transparent group-hover:bg-bone group-hover:text-ink"
             >
               <ArrowUpRight className="size-5" />
             </span>

@@ -9,7 +9,7 @@ import { cn } from "@/app/_lib/utils";
  * Staggers in every direct child of the group.
  *
  * Children are targeted by `:scope > *` rather than by a class so callers do
- * not have to remember to tag each item — a card grid can be wrapped as-is.
+ * not have to remember to tag each item: a card grid can be wrapped as-is.
  */
 export function StaggerGroup({
   as: Tag = "div",

@@ -8,7 +8,7 @@ import { cn } from "@/app/_lib/utils";
 /**
  * A display heading whose lines rise out from behind a mask.
  *
- * `lines` is an array of strings — one per visual line — because splitting a
+ * `lines` is an array of strings, one per visual line, because splitting a
  * single string on width is unreliable across fonts and breakpoints. Each line
  * is wrapped in its own `overflow-hidden` element so the mask edge is the line
  * box itself and there is nothing to clip against a parent.

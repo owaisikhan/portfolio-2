@@ -1,55 +1,66 @@
-# Owais Khan — Portfolio (v2)
+# Owais Khan: Portfolio (v3, "Cutting Room")
 
-A dark, motion-led portfolio built to be shown to prospective clients. It lists
-2026 work drawn from the repositories I own or build in, with a full
-case-study page per project.
+A dark, film-led portfolio shown to prospective clients. It lists 2026 work
+drawn from the repositories I own or build in, with a case-study page per
+project.
 
-Sections: hero, stats, selected work, about, services, process, stack, FAQ and
-contact — plus `/work/[slug]` for each project.
+Home page, top to bottom: hero with a camera-style monitor, a strip of four
+counts, selected work (six feature spreads), the full filterable index,
+services, about with process and tools, FAQ and contact. Each project also
+gets `/work/[slug]`.
+
+## Design: Cutting Room
+
+The site is an edit suite for the work: true neutral black, bone white type,
+and one tungsten amber used only for timecodes, scene numbers and the REC
+light. Display type is **Anton** in capitals; text is **Geist**; labels and
+timecodes are **Geist Mono**. Sections open like slate calls (`SC 01`), the
+featured spreads are numbered as takes, and any project without a captured
+screenshot shows a clapperboard **slate** whose fields are real (PROD is the
+project, SCENE its category, TAKE its platform, ROLL its year).
 
 ## Stack
 
-- **Next.js 16** (App Router, Turbopack, `app/` at the repository root — no `src/`)
+- **Next.js 16** (App Router, Turbopack, `app/` at the repository root, no `src/`)
 - **React 19**
-- **Tailwind CSS v4** — design tokens declared with `@theme` in
+- **Tailwind CSS v4**: design tokens declared with `@theme` in
   `app/_styles/globals.css`, no `tailwind.config.js`
-- **shadcn/ui** — Button, Card, Badge, Accordion, Separator, in
+- **shadcn/ui**: Button, Card, Badge, Accordion, Separator, in
   `app/_components/ui/`, configured for plain JS via `components.json`
-- **GSAP + ScrollTrigger** — scroll choreography: reveals, staggers, the
-  kinetic headline, the terminal type-on, the process spine, stat counters
-- **Motion** — pointer-driven interaction: magnetic buttons, tilt cards, the
-  custom cursor, the scroll progress bar, the mobile menu
-- **Geist Sans / Geist Mono**, self-hosted through the `geist` package
+- **GSAP + ScrollTrigger**: reveals, staggers, the kinetic headline, the stat
+  counters, the hero monitor drift
+- **Motion**: magnetic button, scroll progress bar, mobile menu
+- **Lenis**: smooth scroll, driven from GSAP's ticker
+- **Anton** (self-hosted from `app/_assets/fonts`, OFL), **Geist Sans / Mono**
+  through the `geist` package
 - Plain JavaScript with `jsconfig.json` path aliases (`@/*`), flat
   `eslint.config.mjs`
 
-No database, no environment variables, no API routes, no images.
+No database, no environment variables, no API routes. Images are the project
+covers in `public/work`.
 
 ## Project structure
 
 ```
 app/
+  _assets/fonts/  Anton (woff2 + OFL licence)
   _components/
     layout/   Navbar, Footer
-    home/     Hero, TerminalCard, Stats, Work, About, Services,
-              Process, Stack, Faq, Contact
+    home/     Hero, HeroMonitor, Proof, Work, WorkIndex, Services,
+              ServiceProjectsLink, About, Faq, Contact
     motion/   Reveal, StaggerGroup, KineticHeading, MagneticButton,
-              TiltCard, Marquee, Counter, ScrollProgress, Cursor
-    shared/   SectionHeading
+              Counter, ScrollProgress, SmoothScroll
+    shared/   SectionHeading, ProjectCover, Slate, WhatsAppIcon
     ui/       shadcn primitives (button, card, badge, accordion, separator)
-  _data/      projects.js    — every project shown on the site
-  _lib/       siteConfig.js  — name, copy, nav, services, process, stack, FAQ
-              gsap.js        — plugin registration + reduced-motion helper
-              utils.js       — cn()
-  _styles/    globals.css    — @theme tokens and global rules
-  work/[slug]/page.js        — case-study pages (statically generated)
-  layout.js
-  page.js
-  not-found.js
-  icon.svg
-docs/
-  PROGRESS.md                — why things are built the way they are
-components.json              — shadcn CLI configuration
+  _data/      projects.js    (every project shown on the site, and categories)
+  _lib/       siteConfig.js  (name, copy, nav, services, process, stack, FAQ, stats)
+              indexFilter.js (the work index's category filter store)
+              gsap.js        (plugin registration + reduced-motion helper)
+              utils.js       (cn())
+  _styles/    globals.css    (@theme tokens and global rules)
+  work/[slug]/page.js        (case-study pages, statically generated)
+public/work/                 (project covers, 1600x1000)
+docs/PROGRESS.md             (why things are built the way they are)
 ```
 
 ## Getting started
@@ -64,61 +75,62 @@ npm run lint
 
 ## Editing content
 
-Everything visitor-facing lives in two files — no component edits needed for
-routine updates:
+Everything visitor-facing lives in two files:
 
-- **`app/_lib/siteConfig.js`** — name, role, availability, headline, intro,
-  about paragraphs, nav links, services, process steps, stack groups, marquee
-  items, FAQ entries and the stat tiles.
-- **`app/_data/projects.js`** — the project list. Each entry drives both its
-  card in the work grid and its generated case-study page, so adding a project
-  is one object; no route needs to be created.
+- **`app/_lib/siteConfig.js`**: name, availability, headline, intro, about,
+  nav, services, process, stack, FAQ, the hero film and the WhatsApp number.
+  The four counts in `stats` are computed from the project list.
+- **`app/_data/projects.js`**: the project list. Each entry drives its index
+  row, its spread (when `featured`), the hero reel and its case-study page.
 
 ### Project fields
 
 | Field | Purpose |
 | --- | --- |
 | `slug` | URL segment for `/work/[slug]` |
-| `name`, `tagline`, `summary` | Card and case-study headers |
+| `name`, `tagline`, `summary` | Index row, spread and case-study header |
 | `problem`, `approach`, `outcome` | The three case-study body sections |
 | `highlights` | Bullet list on the case study |
-| `stack` | Chips; the first four show on the card |
-| `links` | `[{ label, href }]` — **leave empty for private client work** |
-| `isPrivate` | Adds the "Client / private" badge and swaps the links block for a "happy to walk through it on a call" note |
-| `accent` | Per-project colour used for the card rule, case-study glow and highlight ticks |
-| `kind`, `role`, `year` | Metadata shown on the card and case study |
+| `improvements` | "What I would improve next" on the case study |
+| `stack` | Chips; the first three show on a spread |
+| `category` | One of `categories` (business, offline, commerce, sites); drives the index filter and the service counts |
+| `platform` | Short label: Web, Windows, Android, Web + Windows |
+| `featured` | `true` puts the project in the six spreads and the hero reel |
+| `worksOffline` | `true` when it runs with no internet at all; counted in the proof strip |
+| `cover` | `{ src, alt }` under `/work/`, or `null` to show the slate |
+| `walkthrough` | `{ src, poster, duration, chapters }` or `null` (player comes with the case-study redesign) |
+| `links` | `[{ label, href }]`; **leave empty for private client work** |
+| `isPrivate` | Adds the lock and swaps the links for a "walk through it on a call" note |
+| `accent` | The project's colour, used for its slate stripes and highlight ticks |
+| `kind`, `role`, `year` | Metadata on the case study |
 
-The header comment in that file records which 2026 repositories were considered
-and why each one is in or out, so the list can be re-checked later without
-re-deriving it.
+The header comment in `projects.js` records which repositories were considered
+and why each is in or out. Keep it current when the list changes.
 
-### Adding a shadcn component
+### Covers
 
-`components.json` is wired to this layout, so the CLI works unchanged:
+Covers are 1600x1000 JPEG or WebP screenshots in `public/work/<slug>.jpg`,
+captured from the live site or a local build with Playwright at a 1600x1000
+viewport. Set `cover` on the project and the slate disappears everywhere.
 
-```bash
-npx shadcn@latest add tooltip
-```
+### The hero film
 
-It lands in `app/_components/ui/` as plain JSX with a `@/app/_lib/utils`
-import.
+Set `siteConfig.heroVideo` to `{ src: "/media/hero.mp4", webm, poster }` and
+the monitor plays it muted on a loop. While `src` is null the monitor plays a
+reel of the featured projects' covers or slates.
 
 ## Motion notes
 
 - **Reduced motion is respected throughout.** Every animation checks
-  `prefers-reduced-motion` and degrades to the *final* state rather than to a
-  faster animation. `app/_lib/gsap.js` exports the helper.
+  `prefers-reduced-motion` and degrades to the *final* state. Lenis does not
+  start, the timecode stays at zero and the reel holds on its first card.
 - **Reveal elements are pre-hidden in CSS** so GSAP can fade them in without a
-  flash of already-visible content. A `<noscript>` block in `app/layout.js`
-  puts them back for visitors without JavaScript, so the page is never blank.
-- **Scroll- and pointer-frame updates write to the DOM directly**, not through
-  React state — the stat counters, terminal type-on and tilt spotlight would
-  otherwise re-render on every frame.
-- **`html` uses `overflow-x: clip`, never `hidden`.** See `docs/PROGRESS.md`;
-  `hidden` silently breaks every ScrollTrigger on the page.
+  flash. A `<noscript>` block in `app/layout.js` puts them back.
+- **Frame-rate updates write to the DOM directly**, not through React state:
+  the counters and the hero timecode.
+- **`html` uses `overflow-x: clip`, never `hidden`.** See `docs/PROGRESS.md`.
 
 ## Deployment
 
-A standard Next.js app with no server-side data dependencies, environment
-variables or database. Every route is prerendered (`/`, `/work/[slug]`,
-`/_not-found`), so it deploys as-is to Vercel, Netlify or any static host.
+A standard Next.js app with no server-side data dependencies. Every route is
+prerendered, so it deploys as-is to Vercel or any static host.
