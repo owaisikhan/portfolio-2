@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Project: Owais Khan — Portfolio (v2)
 
+Built with the kodexa-builder skill (v1.4.0). Load it for any new feature or
+design work, and log preferences, corrections and reversals to
+`.claude/kodexa-learnings.md` as they happen.
+
 A dark, motion-led portfolio built on shadcn/ui, Motion and GSAP, showing 2026
 client and collaborative work to prospective clients. Static: no database, no
 environment variables, no API routes, no images.
