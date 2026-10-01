@@ -18,6 +18,7 @@ for the rules.
 |---|---|---|---|---|---|
 | L-001 | 2026-10-01 | rule | Redesign starts with concepts, design language and a skeleton, agreed before any visual design or code | all | logged |
 | L-002 | 2026-10-01 | gap | Portfolio projects carry a cover image on the home page and a walkthrough video on the case study | type: marketing-site | logged |
+| L-003 | 2026-10-01 | choice | Meridian Digital Consulting comes off the portfolio | project | project |
 
 ## Entries
 
@@ -36,3 +37,11 @@ for the rules.
 - **Scope:** type: marketing-site (portfolios)
 - **Target in skill:** references/types/marketing-site.md, section 7 "Content, pages and SEO"
 - **Status:** logged
+
+### L-003 · 2026-10-01 · medium · choice
+- **Said / saw:** "remove this project" (artifact comment on the Meridian Digital Consulting row of the skeleton's work index)
+- **Context:** portfolio v3 skeleton, project list
+- **Lesson:** Meridian Digital Consulting is not shown on this portfolio. Remove its entry from `app/_data/projects.js` in the v3 build and record it as "out, owner's call" in that file's header ledger.
+- **Scope:** project
+- **Target in skill:** none (project content)
+- **Status:** project
