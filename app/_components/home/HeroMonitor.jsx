@@ -109,7 +109,10 @@ export function HeroMonitor() {
 
       <figcaption className="timecode flex items-center justify-between gap-3 px-3 pt-2.5 pb-1.5 text-muted-foreground">
         {video.src ? (
-          <span>Showreel 2026</span>
+          <>
+            <span className="text-bone">{video.caption}</span>
+            <span className="shrink-0">{video.detail}</span>
+          </>
         ) : (
           <>
             <span className="truncate">

@@ -22,6 +22,8 @@ for the rules.
 | L-004 | 2026-10-01 | choice | Owner picked the dark film-led "Cutting Room" over the recommended light ledger concept | type: marketing-site | logged |
 | L-005 | 2026-10-01 | rule | Once a direction is picked on the skeleton, build it; no separate visual-design round | all | logged |
 | L-006 | 2026-10-01 | rule | For screenshots and walkthroughs of apps behind login, ask the owner for demo logins or .env.local up front | all | logged |
+| L-007 | 2026-10-01 | rule | Owais's portfolio never mentions Kodexa: no end cards, wordmarks or names | project | project |
+| L-008 | 2026-10-01 | choice | Portfolio hero video is a multi-project montage in the reel caption style, fitted to the hero's aspect | type: marketing-site | logged |
 
 ## Entries
 
@@ -71,4 +73,20 @@ for the rules.
 - **Lesson:** Before capturing screenshots or walkthroughs of apps behind a login, check database status (Supabase list_projects) and ask the owner in one message for the exact demo logins or env files needed, per project. Prefer a demo account with sample data; never commit credentials.
 - **Scope:** all projects
 - **Target in skill:** SKILL.md section 3 "Working style"
+- **Status:** logged
+
+### L-007 · 2026-10-01 · strong · rule
+- **Said / saw:** "but donot mention kodexa anywhere,"
+- **Context:** portfolio-2 hero film and walkthroughs; the source reels ended on the Kodexa end card
+- **Lesson:** On the owner's personal portfolio, Kodexa does not appear at all: trim reel end cards, hide wordmarks when recording (text-node walker), rename projects that carry the name, and keep it out of source comments.
+- **Scope:** project
+- **Target in skill:** none (project rule, recorded in AGENTS.md)
+- **Status:** project
+
+### L-008 · 2026-10-01 · strong · choice
+- **Said / saw:** "The hero video should contain multiple projects shown in one video ... gather multiple clips like these for a hero video" and "like the reference provided but to fit the aspect ratio of hero video section"
+- **Context:** portfolio hero; references were the 9:16 Vendrix and 16:9 pump reels
+- **Lesson:** A portfolio hero film is a montage of 3 to 4 s clips from several products, each with one reel-style caption, re-recorded at the hero's own aspect (not letterboxed phone footage), cross-faded, with a seamless loop point and no end card. kodexa-reels scrollrec.js with VIEW=1024x640 DSF=1.5625 gives 1600x1000 desktop frames; WebGL sites need swiftshader flags and DSF 1.
+- **Scope:** type: marketing-site (portfolios)
+- **Target in skill:** kodexa-reels references/recipes.md (new recipe: hero montage), kodexa-builder marketing-site.md section 5 "Video heroes"
 - **Status:** logged

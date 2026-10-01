@@ -21,13 +21,13 @@
  *   in   owaisikhan/Rag-Research-Assistant (Folio)
  *   in   owaisikhan/ai-tryon-store
  *   in   owaisikhan/Tea-website-for-video (Kinari Tea House)
- *   in   owaisikhan/coffee-site-from-video (Kodexa House)
+ *   in   owaisikhan/coffee-site-from-video (Espresso Bar and Roastery)
  *   in   owaisikhan/site-audit, owaisikhan/web-audit-toolkit
  *   out  owaisikhan/merdian-consulting                    : owner's call, 2026-10-01
- *   ask  owaisikhan/kodexa-website, owaisikhan/igloo       : Kodexa's public face is
- *        Hamid Javed, so these wait on the owner
- *   ask  owaisikhan/storify-clone, owaisikhan/Scroll-Animation
- *   out  Core-Stack, kodexa-tailor, burger-king, 3d-Effect : clones of other sites
+ *   out  the two studio website repositories (incl. igloo)    : not shown here
+ *   in   owaisikhan/storify-clone (Vendrix, client marketplace; live at vendrixx.vercel.app)
+ *   ask  owaisikhan/Scroll-Animation
+ *   out  Core-Stack, burger-king, 3d-Effect and the tailor site clone : clones of other sites
  *   out  shopify-online-store-with-next-js, agentic-crm,
  *        ai-website-cloner-template, services              : templates and forks
  *   out  pump-manager-display, coffee-shop-2, improve-saam-strore : duplicates
@@ -71,7 +71,19 @@ export const projects = [
     featured: true,
     isPrivate: true,
     cover: null,
-    walkthrough: null,
+    walkthrough: {
+      src: "/media/pump-manager.mp4",
+      webm: "/media/pump-manager.webm",
+      poster: "/media/pump-manager-poster.jpg",
+      duration: "0:15",
+      chapters: [
+        { at: 0, label: "Dashboard" },
+        { at: 4, label: "Daily readings" },
+        { at: 7, label: "Monthly report" },
+        { at: 10, label: "Treasury" },
+        { at: 13, label: "Last 14 days" },
+      ],
+    },
     tagline: "A petrol pump's entire back office, running on one laptop with no internet.",
     summary:
       "Desktop build of a petrol-pump management system, packaged with Electron so it installs like a normal Windows program. No server, no Docker, no cloud account, and no internet connection needed to run it.",
@@ -95,6 +107,58 @@ export const projects = [
     ],
     stack: ["Next.js", "Electron", "PostgreSQL", "electron-builder", "Recharts"],
     links: [],
+  },
+  {
+    slug: "vendrix",
+    name: "Vendrix",
+    year: "2026",
+    role: "Two-person team",
+    kind: "E-commerce",
+    category: "commerce",
+    platform: "Web",
+    accent: "#3b6cf6",
+    featured: true,
+    isPrivate: false,
+    cover: null,
+    walkthrough: {
+      src: "/media/vendrix.mp4",
+      webm: "/media/vendrix.webm",
+      poster: "/media/vendrix-poster.jpg",
+      duration: "0:19",
+      chapters: [
+        { at: 0, label: "Home" },
+        { at: 3, label: "Categories" },
+        { at: 6, label: "Top selling" },
+        { at: 9, label: "Deals" },
+        { at: 12, label: "Collections" },
+        { at: 14, label: "Coupon" },
+        { at: 16, label: "Vendors" },
+      ],
+    },
+    tagline: "A multi-vendor electronics marketplace, where every seller gets their own shop.",
+    summary:
+      "An electronics marketplace built for a client: phones, laptops, watches and accessories from many vendors in one store, with categories and brands, live deals, coupon codes, a cart, a wishlist and checkout, and a shop page for every seller.",
+    problem:
+      "A marketplace has two customers: the shopper who wants to compare and buy quickly, and the vendor who wants a shop of their own without running a site. Most store templates only serve the first.",
+    approach:
+      "One Next.js storefront with a page for every vendor, product, category, brand and collection, generated statically so it stays fast. Cart, wishlist and reviews are stored in Supabase, and the light and dark themes are remembered without a flash on reload.",
+    outcome:
+      "The client has a live marketplace: shoppers filter by featured, new or on sale in one tap, deals count down live, coupon codes copy in one tap, and each vendor's shop shows its rating, sales and products.",
+    highlights: [
+      "A shop page for every vendor, with rating, sales and price level",
+      "Featured, new arrivals and on sale tabs on every product rail",
+      "Deals with a live countdown",
+      "Coupon codes copied in one tap",
+      "Cart, wishlist and reviews stored in Supabase",
+      "Light and dark themes, remembered without a flash",
+    ],
+    improvements: [
+      "A vendor dashboard for sellers to manage their own stock and orders",
+      "Order updates on WhatsApp",
+      "Search that understands typos and model numbers",
+    ],
+    stack: ["Next.js 16", "TypeScript", "Supabase", "Tailwind CSS v4", "shadcn/ui"],
+    links: [{ label: "Live site", href: "https://vendrixx.vercel.app/" }],
   },
   {
     slug: "pmc-hospital",
@@ -292,7 +356,7 @@ export const projects = [
     accent: "#eab308",
     featured: false,
     isPrivate: true,
-    cover: null,
+    cover: { src: "/work/petrol-pump-management-software.jpg", alt: "Daily readings screen: six of six nozzles entered, 2,345.29 litres sold, and each diesel nozzle's fuel, sales and cash" },
     walkthrough: null,
     tagline: "The web original the offline desktop build was cut from.",
     summary:
@@ -530,8 +594,8 @@ export const projects = [
     links: [{ label: "Repository", href: "https://github.com/owaisikhan/ai-tryon-store" }],
   },
   {
-    slug: "kodexa-house",
-    name: "Kodexa House",
+    slug: "espresso-bar",
+    name: "Espresso Bar and Roastery",
     year: "2026",
     role: "Two-person team",
     kind: "Brand site",
@@ -540,7 +604,7 @@ export const projects = [
     accent: "#c08457",
     featured: false,
     isPrivate: false,
-    cover: { src: "/work/kodexa-house.jpg", alt: "Kodexa House hero: an espresso portafilter in close-up beside the Kodexa House wordmark and a Scroll now prompt" },
+    cover: { src: "/work/espresso-bar.jpg", alt: "A double ristretto pouring into a white cup, with the shot's dose, yield, time and brew temperature listed beside it" },
     walkthrough: null,
     tagline: "An espresso bar site where scrolling pours the latte, frame by frame.",
     summary:

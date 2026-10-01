@@ -111,7 +111,7 @@ export default async function ProjectPage({ params }) {
 
       <div className="shell pb-16 md:pb-20">
         <Reveal className="overflow-hidden rounded-lg border border-border">
-          <ProjectCover project={project} sizes="(min-width: 1376px) 1296px, 100vw" priority />
+          <ProjectCover project={project} sizes="(min-width: 1376px) 1296px, 100vw" priority motion />
         </Reveal>
       </div>
 

@@ -36,8 +36,8 @@ project, SCENE its category, TAKE its platform, ROLL its year).
 - Plain JavaScript with `jsconfig.json` path aliases (`@/*`), flat
   `eslint.config.mjs`
 
-No database, no environment variables, no API routes. Images are the project
-covers in `public/work`.
+No database, no environment variables, no API routes. Media: project covers in
+`public/work`, the hero film and walkthroughs in `public/media`.
 
 ## Project structure
 
@@ -97,8 +97,8 @@ Everything visitor-facing lives in two files:
 | `platform` | Short label: Web, Windows, Android, Web + Windows |
 | `featured` | `true` puts the project in the six spreads and the hero reel |
 | `worksOffline` | `true` when it runs with no internet at all; counted in the proof strip |
-| `cover` | `{ src, alt }` under `/work/`, or `null` to show the slate |
-| `walkthrough` | `{ src, poster, duration, chapters }` or `null` (player comes with the case-study redesign) |
+| `cover` | `{ src, alt }` under `/work/`, or `null` to fall back to the walkthrough poster, then the slate |
+| `walkthrough` | `{ src, webm, poster, duration, chapters }` or `null`; plays as a loop on the spread and case study (chaptered player comes with the case-study redesign) |
 | `links` | `[{ label, href }]`; **leave empty for private client work** |
 | `isPrivate` | Adds the lock and swaps the links for a "walk through it on a call" note |
 | `accent` | The project's colour, used for its slate stripes and highlight ticks |
@@ -113,11 +113,19 @@ Covers are 1600x1000 JPEG or WebP screenshots in `public/work/<slug>.jpg`,
 captured from the live site or a local build with Playwright at a 1600x1000
 viewport. Set `cover` on the project and the slate disappears everywhere.
 
-### The hero film
+### Videos
 
-Set `siteConfig.heroVideo` to `{ src: "/media/hero.mp4", webm, poster }` and
-the monitor plays it muted on a loop. While `src` is null the monitor plays a
-reel of the featured projects' covers or slates.
+- **Hero film** (`public/media/hero.*`): an 18 s silent loop at 1280x800 cut
+  from six projects, 3.4 s each with 0.4 s cross-fades and a cross-faded loop
+  point so it has no visible seam. Each clip was recorded frame-exactly from a
+  local build with the kodexa-reels `scrollrec.js` (1024x640 at 1.5625x) and
+  captioned in the same banner style. `siteConfig.heroVideo` points at it; set
+  `src` to null and the monitor falls back to a reel of featured covers.
+- **Walkthroughs** (`public/media/<project>.*`): set `walkthrough` on a project
+  and its spread and case study play it as a silent loop that only runs while
+  on screen (`VideoLoop`). Under reduced motion only the poster shows.
+- Keep each file under about 3 MB: H.264 CRF 27 plus VP9 CRF 41, no audio,
+  `+faststart`.
 
 ## Motion notes
 

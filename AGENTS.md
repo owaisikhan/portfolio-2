@@ -31,6 +31,9 @@ motion code, because several things that look redundant are load-bearing.
 - **Concepts and a skeleton come before any visual design or code**, and one
   page is finished before the next starts. The home page is done in v3; the
   case-study page redesign (walkthrough player with chapters) is next.
+- **Never mention Kodexa anywhere on the site**: copy, alt text, covers,
+  videos, metadata or source comments. Hide its wordmark when recording a
+  project that carries it (owner's rule, 2026-10-01).
 - Covers and walkthroughs are captured from live sites or local builds. For
   apps behind a login, ask the owner for a demo account or `.env.local`; never
   commit either.

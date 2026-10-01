@@ -4,7 +4,7 @@ import { projects } from "@/app/_data/projects";
  * Everything visitor-facing that is not a project lives here. Components read
  * from this file; none of this copy should be typed into a component.
  *
- * Copy rules (kodexa-builder anti-slop gate): no em or en dashes anywhere,
+ * Copy rules: no em or en dashes anywhere,
  * no filler words, and say what a business gets before naming the stack.
  */
 export const siteConfig = {
@@ -29,11 +29,18 @@ export const siteConfig = {
     "I build the software a business runs its day on: a petrol pump's books on one laptop with no internet, a pharmacy counter, a hospital ledger, a wholesaler's billing on one phone. Then the stores, AI features and brand sites around them.",
 
   /**
-   * Hero film. `src` is an MP4 under /public/media, `poster` its first frame.
-   * While `src` is null the hero monitor plays a reel of project title cards
-   * instead. PLACEHOLDER: the owner is sending a style reference.
+   * Hero film: a 16:10 silent 18 s loop under /public/media, cut from six
+   * projects (Vendrix, Searline, the pump manager, Kinari, Casa Verde and the
+   * espresso bar site). Set `src` to null and the hero monitor plays a reel of
+   * the featured projects' covers instead.
    */
-  heroVideo: { src: null, webm: null, poster: null },
+  heroVideo: {
+    src: "/media/hero.mp4",
+    webm: "/media/hero.webm",
+    poster: "/media/hero-poster.jpg",
+    caption: "Showreel 2026",
+    detail: "Six products",
+  },
 
   /* About ------------------------------------------------------------------- */
   about: [

@@ -54,7 +54,7 @@ function Spread({ project, take, flip }) {
         )}
       >
         <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:transform-none">
-          <ProjectCover project={project} />
+          <ProjectCover project={project} motion />
         </div>
       </Link>
 

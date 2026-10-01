@@ -39,8 +39,34 @@ What changed and why:
   a business gets.
 - **Proof strip** numbers are computed from `projects.js`.
 
-Covers captured so far (Playwright, 1600x1000): Kinari Tea House, Kodexa House
-and AI Try-on Store from local builds, Roaster from its live site. The rest
+Covers captured so far (Playwright, 1600x1000): Kinari Tea House, the espresso
+bar site and AI Try-on Store from local builds, Roaster from its live site.
+
+### Hero film and walkthroughs (same day)
+
+The owner sent two reference reels (a 9:16 Vendrix store reel and a 16:9 pump
+manager reel) and asked for a hero video that shows several projects in one.
+The hero is an 18 s montage: Vendrix, Searline (burger site), the pump
+manager, Kinari, Casa Verde and the espresso bar site, each a 3.4 s
+frame-exact scroll recording from a local build with one caption, joined by
+0.4 s cross-fades, with the last 0.4 s cross-faded into the first so the loop
+has no seam. Folio, SAAMJ and Pharmacy POS are not in it yet: SAAMJ's two
+Supabase projects are paused, Pharmacy POS needs a login, and Folio's live
+site only shows its empty state. The owner is sending logins.
+
+The full Vendrix reel became that project's walkthrough (Vendrix was added as
+a client project), and the pump reel became the Offline Petrol Pump
+Manager's walkthrough with its end card trimmed. **The owner asked that
+Kodexa is not mentioned anywhere on the site**: the end cards were cut, the
+"Kodexa House" project is listed as "Espresso Bar and Roastery" with a cover
+cropped below its nav, and its clip was recorded with the wordmark hidden.
+
+Gotchas: three.js sites need Chromium's `--use-angle=swiftshader
+--enable-unsafe-swiftshader` and render slowly in software, so the Kinari clip
+was recorded at 1x and upscaled. Playwright's Chromium here does not trust the
+egress proxy's certificate for live HTTPS sites, so clips are recorded from
+local builds. A 16:9 walkthrough in a 16:10 frame crops its sides, so
+`VideoLoop` anchors to the left, where app sidebars sit. The rest
 show slates until the owner provides demo logins or `.env.local` files for the
 apps behind sign-in. The Sohana POS demo URL failed through this sandbox's
 proxy; it may work from a normal network. In Supabase on 2026-10-01 the two
